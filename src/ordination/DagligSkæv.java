@@ -16,6 +16,11 @@ public class DagligSkæv extends Ordination {
         return samletDosis;
     }
 
+
+    public List<Dosis> getDoser() {
+        return dosisList;
+    }
+
     @Override
     public double døgnDosis() {
         double antal = 0;

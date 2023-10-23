@@ -18,6 +18,10 @@ public class DagligFast extends  Ordination {
         this.doser[3] = dosis4;
     }
 
+    public Dosis[] getDoser() {
+        return doser;
+    }
+
     @Override
     public double døgnDosis() {
         double døDosis = 0;

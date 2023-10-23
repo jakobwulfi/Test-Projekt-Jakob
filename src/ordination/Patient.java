@@ -23,4 +23,8 @@ public class Patient {
     public String toString() {
         return navn + "  " + cprNr;
     }
+
+    public ArrayList<Ordination> getOrdiantioner() {
+        return ordiantioner;
+    }
 }
