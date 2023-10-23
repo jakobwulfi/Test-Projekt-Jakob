@@ -19,8 +19,16 @@ public class Patient {
         return vægt;
     }
 
+    public void addOrdination(Ordination ordination){
+        ordiantioner.add(ordination);
+    }
+
     @Override
     public String toString() {
         return navn + "  " + cprNr;
+    }
+
+    public ArrayList<Ordination> getOrdiantioner() {
+        return ordiantioner;
     }
 }

@@ -105,10 +105,10 @@ public class OrdinationDetailsPane extends GridPane {
         txtAnvendt.setText(pn.antalGangeAnvendt() + " gange");
         txtDosis.setText(pn.getAntalEnheder() + "");
 
-        txtDøgndosis.setText(pn.doegnDosis() + " "
-            + pn.getLaegemiddel().getEnhed());
+        txtDøgndosis.setText(pn.døgnDosis() + " "
+            + pn.getLægemiddel().getEnhed());
         txtTotalDosis.setText(pn.samletDosis() + " "
-            + pn.getLaegemiddel().getEnhed());
+            + pn.getLægemiddel().getEnhed());
     }
 
     public void clear() {
@@ -127,7 +127,7 @@ public class OrdinationDetailsPane extends GridPane {
         txtType.setText(ordination.getType());
         txtStarttid.setText(ordination.getStartDato().toString());
         txtSluttid.setText(ordination.getSlutDato().toString());
-        txtLægemiddel.setText(ordination.getLaegemiddel().toString());
+        txtLægemiddel.setText(ordination.getLægemiddel().toString());
         txtDøgndosis.setText(ordination.døgnDosis() + "");
         txtTotalDosis.setText(ordination.samletDosis() + "");
     }
