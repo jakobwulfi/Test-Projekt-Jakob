@@ -12,9 +12,8 @@ public class PN {
     /**
      * Registrer datoen for en anvendt dosis.
      */
-    public boolean anvendDosis(LocalDate dato) {
+    public void anvendDosis(LocalDate dato) {
 
-        return false;
     }
 
     /** Returner antal gange ordinationen er anvendt. */
