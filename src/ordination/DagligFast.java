@@ -5,14 +5,17 @@ import java.util.Arrays;
 
 public class DagligFast extends  Ordination {
 
-    private final Dosis[] doser;
+    private final Dosis[] doser = new Dosis[4];
 
 
 
 
-    protected DagligFast(LocalDate startDato, LocalDate slutDato, Dosis[] doser) {
+    protected DagligFast(LocalDate startDato, LocalDate slutDato, Dosis dosis1, Dosis dosis2, Dosis dosis3, Dosis dosis4) {
         super(startDato, slutDato);
-        this.doser = doser;
+        this.doser[0] = dosis1;
+        this.doser[1] = dosis2;
+        this.doser[2] = dosis3;
+        this.doser[3] = dosis4;
     }
 
     @Override
