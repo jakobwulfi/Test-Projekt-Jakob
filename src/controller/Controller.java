@@ -68,6 +68,7 @@ public abstract class Controller {
      */
     public static void anvendOrdinationPN(PN ordination, LocalDate dato) {
 
+
     }
 
     /**
