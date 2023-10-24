@@ -67,11 +67,19 @@ public abstract class Controller {
      * kastes en IllegalArgumentException, og ordinationen oprettes ikke.
      * Pre: I antalEnheder er alle tal >= 0.
      */
-    public static DagligSkæv opretDagligSkævOrdination(
+    public static DagligSkæv opretDagligSkævOrdination (
             LocalDate startDen, LocalDate slutDen, Patient patient, Lægemiddel lægemiddel,
             LocalTime[] klokkeSlet, double[] antalEnheder) {
-
-        return null;
+        if (startDen.isAfter(slutDen)) {
+            throw new IllegalArgumentException("Startdato er efter slutdato.");
+        } else if (klokkeSlet.length != antalEnheder.length) {
+            throw new IllegalArgumentException("Antal af klokkeslet og enheder matcher ikke.");
+        } else {
+            DagligSkæv dskæv = new DagligSkæv(startDen,slutDen, klokkeSlet, antalEnheder);
+            dskæv.setLægemiddel(lægemiddel);
+            patient.addOrdination(dskæv);
+            return dskæv;
+        }
     }
 
     /**
@@ -109,8 +117,17 @@ public abstract class Controller {
     /** Returner antal ordinationer for det givne vægtinterval og det givne lægemiddel. */
     public static int antalOrdinationerPrVægtPrLægemiddel(
             double vægtStart, double vægtSlut, Lægemiddel lægemiddel) {
-
-        return 0;
+        int count = 0;
+        for (Patient p : getAllPatienter()) {
+            if (p.getVægt() > vægtStart && p.getVægt() < vægtSlut) {
+                for (Ordination o : p.getOrdiantioner()) {
+                    if (o.getLægemiddel().equals(lægemiddel)) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     public static List<Patient> getAllPatienter() {
