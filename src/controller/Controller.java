@@ -23,8 +23,14 @@ public abstract class Controller {
     public static PN opretPNOrdination(
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
             double antal) {
+        PN pnOrdination = new PN(antal,startDato,slutDato);
 
-        return null;
+        if(startDato.isAfter(slutDato)) {
+            throw new IllegalArgumentException("Start dato skal være før slut dato ");
+        }else if(antal > 0){
+            patient.getOrdiantioner().add(pnOrdination);
+        }
+        return pnOrdination;
     }
 
     /**
