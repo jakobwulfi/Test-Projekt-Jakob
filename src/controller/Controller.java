@@ -42,7 +42,20 @@ public abstract class Controller {
     public static DagligFast opretDagligFastOrdination(
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
             double morgenAntal, double middagAntal, double aftenAntal, double natAntal) {
+        if (startDato.isAfter(slutDato)){
+            IllegalArgumentException ex = new IllegalArgumentException("Start dato er efter slut dato");
+            throw ex;
+        } else {
+            Dosis morgen = new Dosis(LocalTime.of(8, 0), morgenAntal);
+            Dosis middag = new Dosis(LocalTime.of(12, 0), middagAntal);
+            Dosis aften = new Dosis(LocalTime.of(18, 0), aftenAntal);
+            Dosis nat = new Dosis(LocalTime.of(24, 0), natAntal);
 
+            DagligFast dagligFast = new DagligFast(startDato,slutDato,morgen,middag,aften,nat);
+            dagligFast.setLægemiddel(lægemiddel);
+
+            patient.addOrdination(dagligFast);
+        }
         return null;
     }
 
@@ -79,8 +92,18 @@ public abstract class Controller {
      * (afhænger af patientens vægt).
      */
     public static double anbefaletDosisPrDøgn(Patient patient, Lægemiddel lægemiddel) {
+        double anbefalet;
+        double vægt = patient.getVægt();
+        if (vægt < 25) {
+            anbefalet = vægt * lægemiddel.getEnhedPrKgPrDøgnLet();
+        } else if ( 25 <= vægt && vægt <= 120){
+            anbefalet = vægt * lægemiddel.getEnhedPrKgPrDøgnNormal();
+        } else {
+            anbefalet = vægt * lægemiddel.getEnhedPrKgPrDøgnTung();
+        }
 
-        return 0;
+
+        return anbefalet;
     }
 
     /** Returner antal ordinationer for det givne vægtinterval og det givne lægemiddel. */
