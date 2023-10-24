@@ -7,8 +7,12 @@ import java.util.List;
 
 public class DagligSkæv extends Ordination {
     private final List<Dosis> dosisList = new ArrayList<>();
-    protected DagligSkæv(LocalDate startDato, LocalDate slutDato) {
+    private final LocalTime[] klokkeslet;
+    private final double[] antalEnheder;
+    public DagligSkæv(LocalDate startDato, LocalDate slutDato, LocalTime[] klokkeslet, double[] antalEnheder) {
         super(startDato, slutDato);
+        this.klokkeslet = klokkeslet;
+        this.antalEnheder = antalEnheder;
     }
     @Override
     public double samletDosis() {
@@ -19,6 +23,14 @@ public class DagligSkæv extends Ordination {
 
     public List<Dosis> getDoser() {
         return dosisList;
+    }
+
+    public LocalTime[] getKlokkeslet() {
+        return klokkeslet;
+    }
+
+    public double[] getAntalEnheder() {
+        return antalEnheder;
     }
 
     @Override
