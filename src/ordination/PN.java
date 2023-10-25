@@ -29,6 +29,7 @@ public class PN extends Ordination{
     public void anvendDosis(LocalDate dato) {
         if(getStartDato().isAfter(dato) && getSlutDato().isBefore(dato)){
             datoForDosis.add(dato);
+
         }
     }
 
@@ -40,7 +41,12 @@ public class PN extends Ordination{
 
     @Override
     public double døgnDosis() {
-        double dagligDosis = antalGangeAnvendt() * antalEnheder / antalDage();
+        if(datoForDosis.isEmpty()){
+            return 0;
+        }
+        LocalDate start = datoForDosis.get(0);
+        LocalDate slut = LocalDate.ofEpochDay(datoForDosis.lastIndexOf(datoForDosis.size()));
+        double dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
         return dagligDosis;
     }
     @Override
