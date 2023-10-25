@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class PN extends Ordination{
     private final double antalEnheder;
-    private ArrayList datoForDosis = new ArrayList<>();
+    private ArrayList<LocalDate> datoForDosis = new ArrayList<>();
 
 
     public PN(double antalEnheder, LocalDate startDato, LocalDate slutDato) {
