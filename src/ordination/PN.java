@@ -34,16 +34,13 @@ public class PN extends Ordination{
 
     /** Returner antal gange ordinationen er anvendt. */
     public int antalGangeAnvendt() {
-        int antalAnvent = 0;
-        antalAnvent = datoForDosis.size();
-
-        return antalAnvent;
+        int antalAnvendt = datoForDosis.size();
+        return antalAnvendt;
     }
 
     @Override
     public double døgnDosis() {
         double daysBetween = (double) ChronoUnit.DAYS.between((Temporal) datoForDosis.get(0), (Temporal) datoForDosis.get(datoForDosis.size()));
-
         double dagligDosis = antalGangeAnvendt() * antalEnheder / daysBetween;
         return dagligDosis;
     }
