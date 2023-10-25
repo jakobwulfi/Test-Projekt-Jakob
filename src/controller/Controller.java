@@ -22,15 +22,14 @@ public abstract class Controller {
      */
     public static PN opretPNOrdination(
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
-            double antal) {
-        PN pnOrdination = new PN(antal,startDato,slutDato);
-        pnOrdination.setLægemiddel(lægemiddel);
-
+            double antal){
         if(startDato.isAfter(slutDato)) {
             throw new IllegalArgumentException("Start dato skal være før slut dato ");
-        }else if(antal > 0){
-            patient.addOrdination(pnOrdination);
         }
+        PN pnOrdination = new PN(antal,startDato,slutDato);
+        pnOrdination.setLægemiddel(lægemiddel);
+        patient.addOrdination(pnOrdination);
+
         return pnOrdination;
     }
 

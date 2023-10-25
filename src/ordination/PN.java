@@ -40,8 +40,7 @@ public class PN extends Ordination{
 
     @Override
     public double døgnDosis() {
-        double daysBetween = (double) ChronoUnit.DAYS.between((Temporal) datoForDosis.get(0), (Temporal) datoForDosis.get(datoForDosis.size()));
-        double dagligDosis = antalGangeAnvendt() * antalEnheder / daysBetween;
+        double dagligDosis = antalGangeAnvendt() * antalEnheder / antalDage();
         return dagligDosis;
     }
     @Override
