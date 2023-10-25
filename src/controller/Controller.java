@@ -55,8 +55,9 @@ public abstract class Controller {
             dagligFast.setLægemiddel(lægemiddel);
 
             patient.addOrdination(dagligFast);
+            return dagligFast;
         }
-        return null;
+
     }
 
     /**
