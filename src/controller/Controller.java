@@ -58,6 +58,7 @@ public abstract class Controller {
             return dagligFast;
         }
 
+
     }
 
     /**
