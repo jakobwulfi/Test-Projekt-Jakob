@@ -120,7 +120,7 @@ public abstract class Controller {
             double vægtStart, double vægtSlut, Lægemiddel lægemiddel) {
         int count = 0;
         for (Patient p : getAllPatienter()) {
-            if (p.getVægt() > vægtStart && p.getVægt() < vægtSlut) {
+            if (p.getVægt() >= vægtStart && p.getVægt() <= vægtSlut) {
                 for (Ordination o : p.getOrdiantioner()) {
                     if (o.getLægemiddel().equals(lægemiddel)) {
                         count++;
