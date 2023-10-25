@@ -24,11 +24,12 @@ public abstract class Controller {
             LocalDate startDato, LocalDate slutDato, Patient patient, Lægemiddel lægemiddel,
             double antal) {
         PN pnOrdination = new PN(antal,startDato,slutDato);
+        pnOrdination.setLægemiddel(lægemiddel);
 
         if(startDato.isAfter(slutDato)) {
             throw new IllegalArgumentException("Start dato skal være før slut dato ");
         }else if(antal > 0){
-            patient.getOrdiantioner().add(pnOrdination);
+            patient.addOrdination(pnOrdination);
         }
         return pnOrdination;
     }
