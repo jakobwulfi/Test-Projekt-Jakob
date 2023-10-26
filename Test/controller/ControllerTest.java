@@ -99,6 +99,19 @@ class ControllerTest {
         Lægemiddel paracetamol = new Lægemiddel("Paracetamol",1,1.5,
                 2,"Ml");
         double anbefaletMid = Controller.anbefaletDosisPrDøgn(mid,paracetamol);
+        assertEquals(anbefaletMid,95.1,0001);
+
+        //Test 2 lav vægt
+        Patient low = new Patient("123456-7890","Sebald",24);
+        double anbefaletLav = Controller.anbefaletDosisPrDøgn(low,paracetamol);
+        assertEquals(anbefaletLav,24,0001);
+
+        //Test 3 høj vægt
+        Patient høj = new Patient("098765-4321","Fede Dorit", 121);
+        double anbefaletHøj = Controller.anbefaletDosisPrDøgn(høj,paracetamol);
+        assertEquals(anbefaletHøj,242);
+
+
 
 
 
