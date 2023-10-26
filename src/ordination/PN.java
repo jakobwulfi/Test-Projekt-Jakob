@@ -27,11 +27,13 @@ public class PN extends Ordination{
      * Registrer datoen for en anvendt dosis.
      */
     public void anvendDosis(LocalDate dato) {
-        if(getStartDato().isAfter(dato) && getSlutDato().isBefore(dato)){
+        if(getStartDato().minusDays(1).isBefore(dato) && getSlutDato().plusDays(1).isAfter(dato)){
             datoForDosis.add(dato);
 
         }
     }
+
+
 
     /** Returner antal gange ordinationen er anvendt. */
     public int antalGangeAnvendt() {
@@ -44,16 +46,26 @@ public class PN extends Ordination{
         if(datoForDosis.isEmpty()){
             return 0;
         }
+
         LocalDate start = datoForDosis.get(0);
-        LocalDate slut = LocalDate.ofEpochDay(datoForDosis.lastIndexOf(datoForDosis.size()));
-        double dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
+        LocalDate slut = start;
+        for(LocalDate localDate : datoForDosis){
+            if (localDate.isAfter(slut)){
+                slut = localDate;
+            }
+        }
+        double dagligDosis;
+        if (start.isEqual(slut)) {
+            dagligDosis = antalGangeAnvendt() * antalEnheder / 1;
+        } else {
+            dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
+        }
         return dagligDosis;
     }
     @Override
     public double samletDosis() {
-
         double totalDosis = 0;
-        totalDosis = døgnDosis() * antalDage();
+        totalDosis = antalEnheder * antalGangeAnvendt();
 
         return totalDosis;
     }
