@@ -63,7 +63,7 @@ class ControllerTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> Controller.opretDagligFastOrdination(LocalDate.of(2023,9,7),
                 LocalDate.of(2023,9,6),patient,lægemiddel,
                 0,1,2,3));
-        assertEquals(exception.getMessage(),"Start dato er efter slut dato");
+        assertEquals("Start dato er efter slut dato",exception.getMessage());
 
 
         //Test 3 antal enheder på en af tidspunkterne er under nul og et objekt med forkert parameter oprettes
@@ -156,17 +156,17 @@ class ControllerTest {
         Lægemiddel paracetamol = new Lægemiddel("Paracetamol",1,1.5,
                 2,"Ml");
         double anbefaletMid = Controller.anbefaletDosisPrDøgn(mid,paracetamol);
-        assertEquals(anbefaletMid,95.1,0001);
+        assertEquals(95.1,anbefaletMid,0001);
 
         //Test 2 lav vægt
         Patient low = new Patient("123456-7890","Sebald",24);
         double anbefaletLav = Controller.anbefaletDosisPrDøgn(low,paracetamol);
-        assertEquals(anbefaletLav,24,0001);
+        assertEquals(24,anbefaletLav,0001);
 
         //Test 3 høj vægt
         Patient høj = new Patient("098765-4321","Fede Dorit", 121);
         double anbefaletHøj = Controller.anbefaletDosisPrDøgn(høj,paracetamol);
-        assertEquals(anbefaletHøj,242);
+        assertEquals(242,anbefaletHøj);
 
 
 
