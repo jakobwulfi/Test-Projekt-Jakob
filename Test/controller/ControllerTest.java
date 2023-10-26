@@ -31,8 +31,6 @@ class ControllerTest {
 
     @Test
     void opretDagligFastOrdination() {
-        Storage storage = new Storage();
-        Controller.setStorage(storage);
         Patient patient =  Controller.opretPatient("121256-0512", "Jane Jensen", 63.4);
         Lægemiddel lægemiddel = Controller.opretLægemiddel("Paracetamol", 1, 1.5,
                 2, "Ml");
@@ -153,9 +151,6 @@ class ControllerTest {
 
     @Test
     void anbefaletDosisPrDøgn() {
-        Storage storage = new Storage();
-        Controller.setStorage(storage);
-
         //Test 1 mellem størrelse
         Patient mid = new Patient("121256-0512","Jane Jensen", 63.4);
         Lægemiddel paracetamol = new Lægemiddel("Paracetamol",1,1.5,
