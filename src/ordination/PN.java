@@ -67,7 +67,7 @@ public class PN extends Ordination{
         if (start.isEqual(slut)) {
             dagligDosis = antalGangeAnvendt() * antalEnheder;
         } else {
-            dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
+            dagligDosis = antalGangeAnvendt() * antalEnheder / (start.until(slut, ChronoUnit.DAYS) +1);
         }
         return dagligDosis;
     }
