@@ -90,7 +90,7 @@ public abstract class Controller {
      * kastes en IllegalArgumentException.
      */
     public static void anvendOrdinationPN(PN ordination, LocalDate dato) {
-        if(dato.isBefore(ordination.getStartDato()) && dato.isAfter(ordination.getSlutDato())){
+        if(dato.isBefore(ordination.getStartDato()) || dato.isAfter(ordination.getSlutDato())){
             throw new IllegalArgumentException("Invalid Date");
         } else{
             ordination.anvendDosis(dato);

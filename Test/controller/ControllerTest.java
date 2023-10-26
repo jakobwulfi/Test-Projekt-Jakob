@@ -1,9 +1,6 @@
 package controller;
 
-import ordination.DagligSkæv;
-import ordination.Lægemiddel;
-import ordination.Patient;
-import ordination.DagligFast;
+import ordination.*;
 import ordination.Lægemiddel;
 import ordination.Patient;
 import org.junit.jupiter.api.Test;
@@ -147,6 +144,29 @@ class ControllerTest {
 
     @Test
     void anvendOrdinationPN() {
+        //Test 1 dato før start dato
+        LocalDate startDato = LocalDate.of(2019,1,23);
+        LocalDate slutDato = LocalDate.of(2019,1,24);
+        LocalDate datoBefore = LocalDate.of(2019,1,22);
+        PN pn = new PN(3,startDato,slutDato);
+        Exception exceptionFør =
+                assertThrows(IllegalArgumentException.class, ()-> Controller.anvendOrdinationPN(pn,datoBefore));
+        assertEquals("Invalid Date",exceptionFør.getMessage());
+
+        //Test 2 Dato efter slut dato
+        LocalDate datoEfter = LocalDate.of(2019,1,25);
+        Exception exceptionEfter = assertThrows(IllegalArgumentException.class,
+                ()-> Controller.anvendOrdinationPN(pn,datoEfter));
+        assertEquals("Invalid Date",exceptionEfter.getMessage());
+
+        //Test 3 Ordination er null
+        LocalDate datoValid = LocalDate.of(2019,1,24);
+        Exception exceptionNull = assertThrows(NullPointerException.class,
+                ()-> Controller.anvendOrdinationPN(null,datoValid));
+
+        //Test 4 alt data er gyldigt og dato for anvendelse bliver registreret
+        Controller.anvendOrdinationPN(pn,datoValid);
+        assertEquals(datoValid,pn.getDatoForDosis().get(0));
     }
 
     @Test
