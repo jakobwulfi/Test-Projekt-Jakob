@@ -33,6 +33,8 @@ public class PN extends Ordination{
         }
     }
 
+
+
     /** Returner antal gange ordinationen er anvendt. */
     public int antalGangeAnvendt() {
         int antalAnvendt = datoForDosis.size();
@@ -46,16 +48,24 @@ public class PN extends Ordination{
         }
 
         LocalDate start = datoForDosis.get(0);
-        LocalDate slut = datoForDosis.get(datoForDosis.size()-1);
-
-        double dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
+        LocalDate slut = start;
+        for(LocalDate localDate : datoForDosis){
+            if (localDate.isAfter(slut)){
+                slut = localDate;
+            }
+        }
+        double dagligDosis;
+        if (start.isEqual(slut)) {
+            dagligDosis = antalGangeAnvendt() * antalEnheder / 1;
+        } else {
+            dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
+        }
         return dagligDosis;
     }
     @Override
     public double samletDosis() {
-
         double totalDosis = 0;
-        totalDosis = døgnDosis() * antalDage();
+        totalDosis = antalEnheder * antalGangeAnvendt();
 
         return totalDosis;
     }
