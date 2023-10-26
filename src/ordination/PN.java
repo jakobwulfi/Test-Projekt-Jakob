@@ -49,14 +49,23 @@ public class PN extends Ordination{
 
         LocalDate start = datoForDosis.get(0);
         LocalDate slut = start;
+
+        for (LocalDate localDate : datoForDosis){
+            if (localDate.isBefore(start)){
+                start = localDate;
+            }
+        }
+
         for(LocalDate localDate : datoForDosis){
             if (localDate.isAfter(slut)){
                 slut = localDate;
             }
         }
+
+
         double dagligDosis;
         if (start.isEqual(slut)) {
-            dagligDosis = antalGangeAnvendt() * antalEnheder / 1;
+            dagligDosis = antalGangeAnvendt() * antalEnheder;
         } else {
             dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
         }
