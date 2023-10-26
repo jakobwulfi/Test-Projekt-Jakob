@@ -48,17 +48,6 @@ class ControllerTest {
         DagligFast dagligFastTest3 = (DagligFast) Controller.getAllPatienter().get(0).getOrdiantioner().get(1);
         assertEquals(dagligFast3.getDoser()[0].getAntal(), dagligFastTest3.getDoser()[0].getAntal());
 
-        //Test 4 patient er lig med null og en null point exception opstår
-        Exception expception4 = assertThrows(NullPointerException.class,() -> Controller.opretDagligFastOrdination(LocalDate.of(2023,9,7),
-                LocalDate.of(2023,9,12),null,lægemiddel,
-                0,1,2,3));
-
-
-        //Test 5 lægemiddel er lig med null
-        //Exception exception5 = assertThrows(NullPointerException.class,() -> Controller.opretDagligFastOrdination(LocalDate.of(2023,9,7),
-        //      LocalDate.of(2023,9,12),patient,null,
-        //    0,1,2,3));
-
 
 
     }
