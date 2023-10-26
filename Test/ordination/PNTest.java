@@ -27,6 +27,7 @@ public class PNTest extends TestCase {
     }
 
     public void testAntalGangeAnvendt() {
+        //TC1
         PN pn1 = new PN(1,LocalDate.parse("2019-02-12"),LocalDate.parse("2019-02-19"));
 
         pn1.anvendDosis(LocalDate.parse("2019-02-12"));
@@ -36,18 +37,34 @@ public class PNTest extends TestCase {
     }
 
     public void testDøgnDosis() {
-        PN pn1 = new PN(2,LocalDate.parse("2019-02-12"),LocalDate.parse("2019-02-19"));
+        //TC2
+        PN pn1 = new PN(2,LocalDate.parse("2019-10-25"),LocalDate.parse("2019-10-31"));
 
-        pn1.anvendDosis(LocalDate.parse("2019-02-12"));
-        pn1.anvendDosis(LocalDate.parse("2019-02-15"));
-        pn1.anvendDosis(LocalDate.parse("2019-02-16"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-25"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-29"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-31"));
 
 
-        assertTrue(pn1.døgnDosis() == 1);
+        assertEquals(1, pn1.døgnDosis(),0001);
 
+       //TC2
+        PN pn2 = new PN(2,LocalDate.parse("2019-10-25"),LocalDate.parse("2019-10-31"));
+
+        pn1.anvendDosis(LocalDate.parse("2019-10-25"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-25"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-31"));
+
+        assertEquals(0.43,pn2.døgnDosis(),0001);
 
     }
 
     public void testSamletDosis() {
+        PN pn1 = new PN(2,LocalDate.parse("2019-10-26"),LocalDate.parse("2019-10-31"));
+
+        pn1.anvendDosis(LocalDate.parse("2019-10-26"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-29"));
+        pn1.anvendDosis(LocalDate.parse("2019-10-31"));
+
+        assertEquals(6.00,pn1.samletDosis(),0001);
     }
 }
