@@ -41,6 +41,10 @@ public class PN extends Ordination{
         return antalAnvendt;
     }
 
+    public ArrayList<LocalDate> getDatoForDosis() {
+        return datoForDosis;
+    }
+
     @Override
     public double døgnDosis() {
         if(datoForDosis.isEmpty()){
