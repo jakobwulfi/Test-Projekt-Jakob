@@ -27,7 +27,7 @@ public class PN extends Ordination{
      * Registrer datoen for en anvendt dosis.
      */
     public void anvendDosis(LocalDate dato) {
-        if(getStartDato().isAfter(dato) && getSlutDato().isBefore(dato)){
+        if(getStartDato().minusDays(1).isBefore(dato) && getSlutDato().plusDays(1).isAfter(dato)){
             datoForDosis.add(dato);
 
         }
@@ -44,8 +44,10 @@ public class PN extends Ordination{
         if(datoForDosis.isEmpty()){
             return 0;
         }
+
         LocalDate start = datoForDosis.get(0);
-        LocalDate slut = LocalDate.ofEpochDay(datoForDosis.lastIndexOf(datoForDosis.size()));
+        LocalDate slut = datoForDosis.get(datoForDosis.size()-1);
+
         double dagligDosis = antalGangeAnvendt() * antalEnheder / start.until(slut, ChronoUnit.DAYS);
         return dagligDosis;
     }
