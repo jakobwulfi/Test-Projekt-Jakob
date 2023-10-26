@@ -92,5 +92,35 @@ class ControllerTest {
 
     @Test
     void antalOrdinationerPrVægtPrLægemiddel() {
+        // Basisdata, initStorage() fra Controller kaldes for at få data
+        double startvægt = 25; // kg
+        double slutvægt = 80; // kg
+        Controller.initStorage();
+        Lægemiddel acetylsalicylsyre = Controller.getAllLægemidler().get(0);
+
+        // Testcase 1 Arrange & Act
+        double result1 = Controller.antalOrdinationerPrVægtPrLægemiddel(startvægt,slutvægt,acetylsalicylsyre);
+
+        // Assert
+        assertEquals(1,result1);
+
+        // Testcase 2
+        double startvægt2 = 80; // kg
+        double slutvægt2 = 25; // kg
+
+        double result2 = Controller.antalOrdinationerPrVægtPrLægemiddel(startvægt2,slutvægt2,acetylsalicylsyre);
+
+        assertEquals(0, result2);
+
+        // Testcase 3 -> test for om søgning er inklusiv af grænseværdier
+        double startvægt3 = 63.4; // kg
+        double slutvægt3 = 63.4; // kg vægt for Jane i initStorage()
+
+        double result3 = Controller.antalOrdinationerPrVægtPrLægemiddel(startvægt3,slutvægt3,acetylsalicylsyre);
+
+        assertEquals(1, result3);
+
+        // Testcase 4 -> IllegalArgumentException for forkert
+
     }
 }
