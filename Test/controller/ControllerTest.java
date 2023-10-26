@@ -120,7 +120,11 @@ class ControllerTest {
 
         assertEquals(1, result3);
 
-        // Testcase 4 -> IllegalArgumentException for forkert
+        // Testcase 4 -> Tester for et andet lægemiddel, der burde have antal ordinationer > 1
+        Lægemiddel parace = Controller.getAllLægemidler().get(1);
 
+        double result4 = Controller.antalOrdinationerPrVægtPrLægemiddel(startvægt,slutvægt,parace);
+
+        assertEquals(2, result4);
     }
 }
